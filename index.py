@@ -12,7 +12,7 @@ LIMIT = None                # (for testing) to limit the number of documents ind
 IGNORE_STOPWORDS = True     # toggling the option for ignoring stopwords
 IGNORE_NUMBERS = True       # toggling the option for ignoring numbers
 IGNORE_SINGLES = True       # toggling the option for ignoring single character tokens
-RECORD_TIME = False         # toggling for recording the time taken for indexer
+RECORD_TIME = True         # toggling for recording the time taken for indexer
 BYTE_SIZE = 4               # docID is in int
 
 """
@@ -39,7 +39,7 @@ def index(document_directory, dictionary_file, postings_file):
         
         # if valid document
         if (os.path.isfile(file_path)):
-            file = codecs.open(file_path, encoding='utf-8')
+            file = codecs.open(file_path, encoding='utf-8',errors='ignore')
             document = file.read()                  # read entire document
             tokens = nltk.word_tokenize(document)   # list of word tokens from document
             
@@ -93,6 +93,7 @@ def index(document_directory, dictionary_file, postings_file):
     # close files
     dict_file.close()
     post_file.close()
+    #print dictionary
 
 """
 This function is modified from: http://stackoverflow.com/questions/354038/how-do-i-check-if-a-string-is-a-number-in-python
@@ -140,6 +141,7 @@ if document_directory == None or dictionary_file == None or postings_file == Non
     print_usage()
     sys.exit(2)
 
+#print dictionary
 if (RECORD_TIME): start = timeit.default_timer()                              # start time
 index(document_directory, dictionary_file, postings_file)   # call the indexer
 if (RECORD_TIME): stop = timeit.default_timer()                               # stop time
