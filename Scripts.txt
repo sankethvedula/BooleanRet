@@ -1,0 +1,1 @@
+perl -e'rename $_, $i++ while(<*.txt>)'

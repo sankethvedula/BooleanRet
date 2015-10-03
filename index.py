@@ -40,7 +40,16 @@ def index(document_directory, dictionary_file, postings_file):
         # if valid document
         if (os.path.isfile(file_path)):
             file = codecs.open(file_path, encoding='utf-8',errors='ignore')
+            #file12 = open(file_path,'r')
+            #print type(file12)
+
+            
+
             document = file.read()                  # read entire document
+            #print type(document)
+            #con_uni= document.encode('Unicode')
+            #print type(con_uni)
+
             tokens = nltk.word_tokenize(document)   # list of word tokens from document
             
             # for each term in document
